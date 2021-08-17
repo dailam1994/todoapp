@@ -8,5 +8,148 @@
 </head>
 <body>
     <h1>ToDo App</h1>
+    <fieldset>
+        <legend>Authentication</legend>
+        <form method='post'
+            action='/api/login'
+            onsubmit="login(event)">
+            <input type='text'
+                name='username'
+                required />
+            <input type='password'
+                name='password'
+                required />
+            <input type='submit'
+                name='submit'
+                value='login' />
+        </form>
+        <form method='put'
+            action='/api/register'
+            onsubmit='register(event)'>
+            <input type='text'
+                name='username'
+                required />
+            <input type='email'
+                name='email'
+                required />
+            <input type='password'
+                name='password'
+                required />
+            <input type='submit'
+                name='submit'
+                value='register' />
+        </form>
+        <form method='get'
+            action='/api/doesuserexist'
+            onsubmit='userexists(event)'>
+            <input type='text'
+                name='username' 
+                required />
+            <input type='submit'
+                name='submit'
+                value='do user exist' />
+        </form>
+        <form method='get'
+            action='/api/isloggedin'
+            onsubmit='userloggedin(event)'>
+            <input type='submit'
+                value='isloggedin' />
+        </form>
+        <form method='get'
+            action='/api/logout'
+            onsubmit='userlogout(event)'>
+            <input type='submit'
+                value='logout' />
+        </form>
+    </fieldset>
+    <fieldset>
+        <legend>Todo Category</legend>
+        <form method='get'
+            action='/api/getcat'
+            onsubmit='getcategories(event)'>
+            <input type='submit'
+                name='submit'
+                value='get categories' />
+        </form>
+        <form method='put'
+            action='/api/addcat'
+            onsubmit='addcategory(event)'>
+            <input type='text'
+                name='categoryname' 
+                required />
+            <input type='submit'
+                name='submit'
+                value='add category' />
+        </form> 
+        <form method='delete'
+            action='/api/delcat'
+            onsubmit='delcategory(event)'>
+            <input type='hidden'
+                name='catid'
+                value='0' />
+            <input type='submit'
+                name='submit'
+                value='delete category' />
+        </form>
+        <form method='patch'
+            action='/api/updatecat' 
+            onsubmit='updatecategory(event)'>
+            <input type='hidden'
+                name='catid'
+                value='0' />
+            <input type='text'
+                name='categoryname' 
+                required />
+            <input type='submit' 
+                name='submit'
+                value='edit category' />
+        </form>
+    </fieldset>
+    <fieldset>
+        <legend>Todo Items</legend>
+        <form method='get'
+            action='/api/gettodos'
+            onsubmit='gettodos(event)'>
+            <input type='hidden'
+                value='0'
+                name='catid'>
+            <input type='submit'
+                name='submit'
+                value='get todos' />
+        </form>
+        <form method='put'
+            action='/api/addtodo'
+            onsubmit='addtodo(event)'>
+            <input type='text'
+                name='todoitem' 
+                required />
+            <input type='submit'
+                name='submit'
+                value='add todo' />
+        </form> 
+        <form method='delete'
+            action='/api/deltodo'
+            onsubmit='deltodo(event)'>
+            <input type='hidden'
+                name='todoid'
+                value='0' />
+            <input type='submit'
+                name='submit'
+                value='delete todo' />
+        </form>
+        <form method='patch'
+            action='/api/updatetodo'
+            onsubmit='updatetodo(event)'>
+            <input type='hidden'
+                name='todoid'
+                value='0' />
+            <input type='text'
+                name='todoitem' 
+                required />
+            <input type='submit' 
+                name='submit'
+                value='edit todos' />
+        </form>
+    </fieldset>
 </body>
 </html>
