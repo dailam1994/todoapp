@@ -53,12 +53,14 @@
             action='/api/isloggedin'
             onsubmit='userloggedin(event)'>
             <input type='submit'
+                name='submit'
                 value='isloggedin' />
         </form>
         <form method='get'
             action='/api/logout'
             onsubmit='userlogout(event)'>
             <input type='submit'
+                name='submit'
                 value='logout' />
         </form>
     </fieldset>
@@ -112,7 +114,7 @@
             onsubmit='gettodos(event)'>
             <input type='hidden'
                 value='0'
-                name='catid'>
+                name='catid' />
             <input type='submit'
                 name='submit'
                 value='get todos' />
@@ -148,7 +150,7 @@
                 required />
             <input type='submit' 
                 name='submit'
-                value='edit todos' />
+                value='edit todo' />
         </form>
     </fieldset>
 </body>
