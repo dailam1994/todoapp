@@ -8,15 +8,17 @@
 </head>
 <body>
     <h1>ToDo App</h1>
-    <fieldset>
+    <fieldset id='authcontent'>
         <legend>Authentication</legend>
         <form method='post'
             action='/api/login'
             onsubmit="login(event)">
             <input type='text'
+                placeholder='User Name'
                 name='username'
                 required />
             <input type='password'
+                placeholder='Password'
                 name='password'
                 required />
             <input type='submit'
@@ -27,27 +29,22 @@
             action='/api/register'
             onsubmit='register(event)'>
             <input type='text'
+                placeholder='User Name'
+                oninput='userExists(event)'
                 name='username'
                 required />
             <input type='email'
+                placeholder='E-mail'
+                oninput='emailExists(event)'
                 name='email'
                 required />
             <input type='password'
+                placeholder='Password'
                 name='password'
                 required />
             <input type='submit'
                 name='submit'
                 value='register' />
-        </form>
-        <form method='get'
-            action='/api/doesuserexist'
-            onsubmit='userexists(event)'>
-            <input type='text'
-                name='username' 
-                required />
-            <input type='submit'
-                name='submit'
-                value='do user exist' />
         </form>
         <form method='get'
             action='/api/isloggedin'
@@ -56,15 +53,8 @@
                 name='submit'
                 value='isloggedin' />
         </form>
-        <form method='get'
-            action='/api/logout'
-            onsubmit='userlogout(event)'>
-            <input type='submit'
-                name='submit'
-                value='logout' />
-        </form>
     </fieldset>
-    <fieldset>
+    <fieldset id='catcontent'>
         <legend>Todo Category</legend>
         <form method='get'
             action='/api/getcat'
@@ -106,8 +96,15 @@
                 name='submit'
                 value='edit category' />
         </form>
+        <form method='get'
+            action='/api/logout'
+            onsubmit='userlogout(event)'>
+            <input type='submit'
+                name='submit'
+                value='logout' />
+        </form>
     </fieldset>
-    <fieldset>
+    <fieldset id='todocontent'>
         <legend>Todo Items</legend>
         <form method='get'
             action='/api/gettodos'

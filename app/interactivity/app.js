@@ -1,4 +1,17 @@
-console.log('ToDo App');
+    reRenderUI()
+function reRenderUI () {
+    if (window.localStorage.getItem('loggedin') == 'false') {
+                console.log('boo')
+        document.getElementById('todocontent').setAttribute('hidden', 'hidden')
+        document.getElementById('catcontent').setAttribute('hidden', 'hidden')
+        document.getElementById('authcontent').removeAttribute('hidden')
+    } else {
+            console.log('hoo')
+        document.getElementById('authcontent').setAttribute('hidden', 'hidden')
+        document.getElementById('todocontent').removeAttribute('hidden')
+        document.getElementById('catcontent').removeAttribute('hidden')
+    }
+}
 // Login
 function login(e) {
     e.preventDefault();
@@ -15,6 +28,22 @@ function login(e) {
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
+            }
+        }
+    )
+    .then(
+        function (headers) {
+            if (headers.status === 401) {
+                window.localStorage.setItem('loggedin', 'false')
+                reRenderUI()
+                console.log('login failed')
+                return
+            }
+            if (headers.status === 200) {
+                window.localStorage.setItem('loggedin', 'true')
+                reRenderUI()
+                console.log('login success')
+                return
             }
         }
     );
@@ -37,18 +66,63 @@ function register(e) {
                 'Content-Type': 'application/json'
             }
         }
-    );
+    )
+    .then(
+        function (headers) {
+            if (headers.status === 201) {
+                console.log('New User Registered Successfully');
+                return
+            }
+        }
+    )
 }
 
-function userexists(e) {
+function userExists(e) {
     e.preventDefault();
     // console.log(e);
-    url = e.target.action + '?username=' + 
-        e.target[0].value;
+    url = '/api/doesuserexist' + '?username=' + 
+        e.target.value;
     fetch(url, 
         {
             method: 'GET',
             credentials: 'include'
+        }
+    )
+    .then(
+        function (headers) {
+            if (headers.status === 200) {
+                console.log('user already exists')
+                return
+            }
+            if (headers.status === 204) {
+                console.log("user doesn't exist")
+                return
+            }
+        }
+    );
+}
+
+function emailExists(e) {
+    e.preventDefault();
+    // console.log(e);
+    url = '/api/doesemailexist' + '?email=' + 
+        e.target.value;
+    fetch(url, 
+        {
+            method: 'GET',
+            credentials: 'include'
+        }
+    )
+    .then(
+        function (headers) {
+            if (headers.status === 200) {
+                console.log('email already exists')
+                return
+            }
+            if (headers.status === 204) {
+                console.log("email doesn't exist")
+                return
+            }
         }
     );
 }
@@ -61,6 +135,20 @@ function userloggedin(e) {
             method: 'GET',
             credentials: 'include'
         }
+    )
+    .then(
+        function (headers) {
+            if (headers.status === 401) {
+                console.log('not logged in')
+                window.localStorage.setItem('loggedin', 'false')
+                return
+            }
+            if (headers.status === 200) {
+                console.log('logged in success')
+                window.localStorage.setItem('loggedin', 'true')
+                return
+            }
+        }
     );
 }
 
@@ -71,6 +159,16 @@ function userlogout(e) {
         {
             method: 'GET',
             credentials: 'include'
+        }
+    )
+    .then(
+        function (headers) {
+            if (headers.status === 200) {
+                console.log('logged out successfully')
+                window.localStorage.setItem('loggedin', 'false')
+                reRenderUI()
+                return
+            }
         }
     );
 }
@@ -83,6 +181,14 @@ function getcategories(e) {
         {
             method: 'GET',
             credentials: 'include'
+        }
+    )
+    .then(
+        function (headers) {
+            if (headers.status === 403) {
+                console.log('unauthorized')
+                return
+            }
         }
     );
 }
@@ -104,6 +210,14 @@ function addcategory(e) {
                 'Content-Type': 'application/json'
             }
         }
+    )
+    .then(
+        function (headers) {
+            if (headers.status === 403) {
+                console.log('unauthorized')
+                return
+            }
+        }
     );
 }
 
@@ -115,6 +229,14 @@ function delcategory(e) {
         {
             method: 'DELETE',
             credentials: 'include'
+        }
+    )
+    .then(
+        function (headers) {
+            if (headers.status === 403) {
+                console.log('unauthorized')
+                return
+            }
         }
     );
 }
@@ -135,6 +257,14 @@ function updatecategory(e) {
                 'Content-Type': 'application/json'
             }
         }
+    )
+    .then(
+        function (headers) {
+            if (headers.status === 403) {
+                console.log('unauthorized')
+                return
+            }
+        }
     );
 }
 
@@ -147,6 +277,14 @@ function gettodos(e) {
         {
             method: 'GET',
             credentials: 'include'
+        }
+    )
+    .then(
+        function (headers) {
+            if (headers.status === 403) {
+                console.log('unauthorized')
+                return
+            }
         }
     );
 }
@@ -168,6 +306,14 @@ function addtodo(e) {
                 'Content-Type': 'application/json'
             }
         }
+    )
+    .then(
+        function (headers) {
+            if (headers.status === 403) {
+                console.log('unauthorized')
+                return
+            }
+        }
     );
 }
 
@@ -179,6 +325,14 @@ function deltodo(e) {
         {
             method: 'DELETE',
             credentials: 'include'
+        }
+    )
+    .then(
+        function (headers) {
+            if (headers.status === 403) {
+                console.log('unauthorized')
+                return
+            }
         }
     );
 }
@@ -197,6 +351,14 @@ function updatetodo(e) {
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
+            }
+        }
+    )
+    .then(
+        function (headers) {
+            if (headers.status === 403) {
+                console.log('unauthorized')
+                return
             }
         }
     );
